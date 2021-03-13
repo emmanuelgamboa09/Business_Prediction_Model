@@ -1,23 +1,22 @@
 import numpy as np
 import tensorflow as tf
 
-# LOad our training data
-npz = np.load('Business_case_data_train.npz')
+# Load our training data
+npz = np.load('Modify_Business_case_data_train.npz')
 
 # split it into our inputs and targets
 train_inputs = npz['inputs'].astype(np.float)
 train_targets = npz['targets'].astype(np.int)
-
 # load our validation and testing data as well
-npz = np.load('Business_case_data_validation.npz')
+npz = np.load('Modify_Business_case_data_validation.npz')
 validation_inputs, validation_targets = npz['inputs'].astype(np.float), npz['targets'].astype(np.int)
 
-npz = np.load('Business_case_data_test.npz')
+npz = np.load('Modify_Business_case_data_test.npz')
 test_inputs, test_targets = npz['inputs'].astype(np.float), npz['targets'].astype(np.int)
 
-BATCH_SIZE = 10
+BATCH_SIZE = 25
 output_size = 2
-hidden_layer_size = 225
+hidden_layer_size = 100
 
 # Setup our model with our designated hidden and output layers
 model = tf.keras.Sequential([
@@ -26,13 +25,12 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(hidden_layer_size, activation='relu'),
     # Second Hidden Layer
     tf.keras.layers.Dense(hidden_layer_size, activation='relu'),
-
     # output layer softmax for classification problem
-    tf.keras.layers.Dense(output_size, activation='softmax')
+    tf.keras.layers.Dense(output_size, activation='sigmoid')
 ])
 
 # setup an early stop feature in order to emit overfitting our model
-early_stop = tf.keras.callbacks.EarlyStopping(patience=2)
+early_stop = tf.keras.callbacks.EarlyStopping(patience=4)
 
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 NUM_EPOCHS = 100

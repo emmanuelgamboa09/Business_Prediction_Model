@@ -2,7 +2,7 @@ import numpy as np
 from sklearn import preprocessing
 
 # Load the data set saved in a csv file
-raw_csv_data = np.loadtxt('Business_case_dataset.csv', delimiter=',')
+raw_csv_data = np.loadtxt('Modify_Business_case_dataset', delimiter=',')
 # Remove Id since ID shouldn't affect our model
 unscaled_inputs_all = raw_csv_data[:, 1:-1]
 
@@ -53,6 +53,6 @@ test_inputs = shuffled_inputs[train_samples_count + validation_samples_count:]
 test_targets = shuffled_targets[train_samples_count + validation_samples_count:]
 
 # Save our data into npz files for our model
-np.savez('Business_case_data_train', inputs=train_inputs, targets=train_targets)
-np.savez('Business_case_data_validation', inputs=validation_inputs, targets=validation_targets)
-np.savez('Business_case_data_test', inputs=test_inputs, targets=test_targets)
+np.savez('Modify_Business_case_data_train', inputs=train_inputs, targets=train_targets)
+np.savez('Modify_Business_case_data_validation', inputs=validation_inputs, targets=validation_targets)
+np.savez('Modify_Business_case_data_test', inputs=test_inputs, targets=test_targets)
