@@ -2,16 +2,16 @@ import numpy as np
 import tensorflow as tf
 
 # Load our training data
-npz = np.load('Modify_Business_case_data_train.npz')
+npz = np.load('Business_case_data_train.npz')
 
 # split it into our inputs and targets
 train_inputs = npz['inputs'].astype(np.float)
 train_targets = npz['targets'].astype(np.int)
 # load our validation and testing data as well
-npz = np.load('Modify_Business_case_data_validation.npz')
+npz = np.load('Business_case_data_validation.npz')
 validation_inputs, validation_targets = npz['inputs'].astype(np.float), npz['targets'].astype(np.int)
 
-npz = np.load('Modify_Business_case_data_test.npz')
+npz = np.load('Business_case_data_test.npz')
 test_inputs, test_targets = npz['inputs'].astype(np.float), npz['targets'].astype(np.int)
 
 BATCH_SIZE = 25
