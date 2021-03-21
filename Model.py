@@ -14,15 +14,15 @@ validation_inputs, validation_targets = npz['inputs'].astype(np.float), npz['tar
 npz = np.load('Business_case_data_test.npz')
 test_inputs, test_targets = npz['inputs'].astype(np.float), npz['targets'].astype(np.int)
 
-BATCH_SIZE = 25
+BATCH_SIZE = 30
 output_size = 2
-hidden_layer_size = 100
+hidden_layer_size = 150
 
 # Setup our model with our designated hidden and output layers
 model = tf.keras.Sequential([
     # dense is applying output = activation(dot(input,weight) + bias)
     # 1st hidden layer
-    tf.keras.layers.Dense(hidden_layer_size, activation='relu'),
+    tf.keras.layers.Dense(hidden_layer_size, activation=tf.keras.layers.LeakyReLU()),
     # Second Hidden Layer
     tf.keras.layers.Dense(hidden_layer_size, activation='relu'),
     # output layer softmax for classification problem
@@ -32,7 +32,7 @@ model = tf.keras.Sequential([
 # setup an early stop feature in order to emit overfitting our model
 early_stop = tf.keras.callbacks.EarlyStopping(patience=4)
 
-model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss=tf.keras.losses.sparse_categorical_crossentropy, metrics=['accuracy'])
 NUM_EPOCHS = 100
 
 # begin training our date
